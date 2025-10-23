@@ -29,8 +29,9 @@ export function SourceInsightDialog({ open, onOpenChange, insight }: SourceInsig
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="sm:max-w-3xl max-h-[90vh] overflow-hidden">
-        <DialogHeader>
+      <DialogContent className="sm:max-w-3xl max-h-[90vh] flex flex-col gap-0">
+        {/* Header */}
+        <DialogHeader className="shrink-0 pb-4">
           <DialogTitle className="flex items-center justify-between gap-2">
             <span>Source Insight</span>
             {displayInsight?.insight_type && (
@@ -41,17 +42,27 @@ export function SourceInsightDialog({ open, onOpenChange, insight }: SourceInsig
           </DialogTitle>
         </DialogHeader>
 
-        <div className="flex-1 overflow-y-auto">
+        {/* Content - 可滾動區域 */}
+        <div className="flex-1 overflow-y-auto min-h-0 -mx-6 px-6">
+          {/* ↑ -mx-6 px-6 讓滾輪貼邊，內容保持 padding */}
           {isLoading ? (
             <div className="flex items-center justify-center py-10">
-              <span className="text-sm text-muted-foreground">Loading insight…</span>
+              <div className="flex flex-col items-center gap-2">
+                <div className="h-8 w-8 animate-spin rounded-full border-4 border-primary border-t-transparent" />
+                <span className="text-sm text-muted-foreground">Loading insight…</span>
+              </div>
             </div>
           ) : displayInsight ? (
-            <div className="prose prose-sm prose-neutral dark:prose-invert max-w-none">
+            <article className="prose prose-sm prose-neutral dark:prose-invert max-w-none pb-4">
               <ReactMarkdown>{displayInsight.content}</ReactMarkdown>
-            </div>
+            </article>
           ) : (
-            <p className="text-sm text-muted-foreground">No insight selected.</p>
+            <div className="flex flex-col items-center justify-center py-20 text-center">
+              <p className="text-sm text-muted-foreground">No insight selected.</p>
+              <p className="text-xs text-muted-foreground/60 mt-1">
+                Select an insight from the list to view details
+              </p>
+            </div>
           )}
         </div>
       </DialogContent>

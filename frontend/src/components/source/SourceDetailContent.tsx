@@ -432,7 +432,7 @@ export function SourceDetailContent({
                   </CardDescription>
                 )}
               </CardHeader>
-              <CardContent>
+              <CardContent className="max-h-[50vh] overflow-y-auto">
                 {isYouTubeUrl && youTubeVideoId && (
                   <div className="mb-6">
                     <div className="aspect-video rounded-lg overflow-hidden bg-black">
@@ -492,7 +492,7 @@ export function SourceDetailContent({
                   AI-generated insights about this source
                 </CardDescription>
               </CardHeader>
-              <CardContent className="space-y-4">
+              <CardContent className="space-y-4 max-h-[50vh] overflow-y-auto">
                 {/* Create New Insight */}
                 <div className="rounded-lg border bg-muted/30 p-4">
                   <h3 className="mb-3 text-sm font-semibold flex items-center gap-2">
@@ -594,7 +594,7 @@ export function SourceDetailContent({
               <CardHeader>
                 <CardTitle>Details</CardTitle>
               </CardHeader>
-              <CardContent className="space-y-6">
+              <CardContent className="space-y-6 max-h-[50vh] overflow-y-auto">
                 {/* Embedding Alert */}
                 {!source.embedded && (
                   <Alert>
